@@ -14,9 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('deparments', function (Blueprint $table) {
+        Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Tenant::class)->nullable()->comment('to make this ->constrained() make tenants table before deparments table');
+            $table->foreignIdFor(Tenant::class)->nullable()->comment('to make this ->constrained() make tenants table before departments table');
             $table->string('name');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deparments');
+        Schema::dropIfExists('departments');
     }
 };
