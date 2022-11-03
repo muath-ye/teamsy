@@ -39,6 +39,10 @@
                         {{ config('app.name') }}
                     </h1>
 
+                    <p class="font-italic tracking-wider text-center text-indigo-400">
+                        Number of current tenant users: {{\App\Models\User::count()}}
+                    </p>
+
                     <ul class="list-reset">
                         <li class="inline px-4">
                             <a href="https://tailwindcss.com" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Tailwind CSS</a>
