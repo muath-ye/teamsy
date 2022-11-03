@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->comment('name of the organization which subscribed to our app');
             $table->timestamps();
         });
     }
