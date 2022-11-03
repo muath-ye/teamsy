@@ -39,9 +39,7 @@
                         {{ config('app.name') }}
                     </h1>
 
-                    <p class="font-italic tracking-wider text-center text-indigo-400">
-                        Number of current tenant users: {{\App\Models\User::count()}}
-                    </p>
+                    <livewire:department-form />
 
                     <ul class="list-reset">
                         <li class="inline px-4">
