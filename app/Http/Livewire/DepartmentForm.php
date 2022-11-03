@@ -2,16 +2,26 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Deparment;
+use App\Models\Department;
 use Livewire\Component;
 
 class DepartmentForm extends Component
 {
-    public $name;
+    public $name = 'Accounting';
+    public $success = false;
+    public function submit()
+    {
+        $this->success = (boolean) Department::create(
+            [
+                'name' => $this->name,
+                'tenant_id' => session()->get('tenant_id'),
+            ]
+        );
+    }
     public function mount($departmentId = null)
     {
         if ($departmentId) {
-            $this->name = Deparment::findOrFail($departmentId)->name;
+            $this->name = Department::findOrFail($departmentId)->name;
         }
     }
     public function render()
