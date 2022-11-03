@@ -34,7 +34,7 @@ class TenantScopeTest extends TestCase
     }
 
     /** @test */
-    public function a_can_only_see_users_on_the_same_tenant()
+    public function a_user_can_only_see_users_on_the_same_tenant()
     {
         // create two tenants
         $tenant_1 = Tenant::factory()->create();
@@ -47,5 +47,36 @@ class TenantScopeTest extends TestCase
         Auth::login($user);
         // assert logged in user should only see 10 users
         $this->assertEquals(10, User::count());
+    }
+
+    /** @test */
+    public function a_user_can_only_creates_users_on_the_his_tenant()
+    {
+        // create two tenants
+        $tenant = Tenant::factory()->create();
+        // create users for each tenant for example 10 users for each tenant
+        $user = User::factory()->create(['tenant_id' => $tenant->id]);
+        // login one users
+        Auth::login($user);
+        // create new user
+        $newUser = User::factory()->create();
+        // assert logged in user should only see 10 users
+        $this->assertEquals($user->tenant_id, $newUser->tenant_id);
+    }
+
+    /** @test */
+    public function a_user_can_only_creates_users_on_the_his_tenant_even_if_other_tenant_provided()
+    {
+        // create two tenants
+        $tenant = Tenant::factory()->create();
+        $tenant_2 = Tenant::factory()->create();
+        // create users for each tenant for example 10 users for each tenant
+        $user = User::factory()->create(['tenant_id' => $tenant->id]);
+        // login one users
+        Auth::login($user);
+        // create new user
+        $newUser = User::factory()->create(['tenant_id' => $tenant_2->id]);
+        // assert logged in user should only see 10 users
+        $this->assertEquals($user->tenant_id, $newUser->tenant_id);
     }
 }
