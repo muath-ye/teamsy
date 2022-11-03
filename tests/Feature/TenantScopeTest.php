@@ -21,6 +21,10 @@ class TenantScopeTest extends TestCase
         $filename = $now->year.'_'.$now->format('m').'_'.$now->format('d').'_'.$now->format('H').$now->format('i').$now->format('s').'_create_tests_table.php';
         $this->assertTrue(File::exists(database_path('migrations/'.$filename)));
         // check tenant_id on migration file
+        $this->assertStringContainsString(
+            '$table->foreignIdFor(Tenant::class)->index()',
+            File::get(database_path('migrations/'.$filename))
+        );
         // clean up
         File::delete(database_path('migrations/'.$filename));
         File::delete(app_path('Models/Test.php'));
