@@ -11,12 +11,7 @@ class DepartmentForm extends Component
     public $success = false;
     public function submit()
     {
-        $this->success = (boolean) Department::create(
-            [
-                'name' => $this->name,
-                'tenant_id' => session()->get('tenant_id'),
-            ]
-        );
+        $this->success = (boolean) Department::create(['name' => $this->name]);
     }
     public function mount($departmentId = null)
     {
