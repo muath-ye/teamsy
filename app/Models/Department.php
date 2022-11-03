@@ -16,5 +16,6 @@ class Department extends Model
      */
     protected $fillable = [
         'name',
+        'tenant_id',
     ];
 }
