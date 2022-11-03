@@ -29,7 +29,9 @@ class Department extends Model
     {
         static::addGlobalScope(new TenantScope);
         static::creating(function ($department) {
-            $department->tenant_id = session()->get('tenant_id');
+            if(session()->has('tenant_id')){
+                $department->tenant_id = session()->get('tenant_id');
+            }
         });
     }
 }
