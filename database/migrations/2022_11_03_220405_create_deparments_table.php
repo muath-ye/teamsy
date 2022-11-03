@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('deparments', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Tenant::class)->nullable()->comment('to make this ->constrained() make tenants table before deparments table');
+            $table->string('name');
             $table->timestamps();
         });
     }
