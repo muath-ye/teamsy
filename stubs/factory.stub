@@ -2,6 +2,7 @@
 
 namespace {{ factoryNamespace }};
 
+use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class {{ factory }}Factory extends Factory
     public function definition()
     {
         return [
-            //
+            'tenant_id' => Tenant::factory()->create(),
         ];
     }
 }
