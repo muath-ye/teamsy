@@ -2,7 +2,7 @@
 
 @section('body')
     <div class="">
-        <div class="m-0 p-0 z-30 block">
+        <div class="m-0 p-0 z-30 fixed">
             @include('components.topbar')
         </div>
         <br class="">
@@ -10,7 +10,7 @@
 
             @include('components.sidebar')
             
-            <div class="w-full -z-10">
+            <div class="w-full z-10">
                 <main class="p-4">
                     @include('components.breadcrumb')
                     @yield('content')
