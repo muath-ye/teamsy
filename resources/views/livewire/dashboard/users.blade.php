@@ -2,118 +2,59 @@
 @section('content')
 
     <div>
-        <p>To attain knowledge, add things every day; To attain wisdom, subtract things every day.</p>
-
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                    Your tenant users
+                    <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Browse a list of users of current tenant
+                        designed to help you work and play, stay organized, keep in touch, grow your business, and more.</p>
+                </caption>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="py-3 px-6">
-                            Product name
+                            User name
                         </th>
                         <th scope="col" class="py-3 px-6">
-                            Color
+                            Role
                         </th>
                         <th scope="col" class="py-3 px-6">
-                            Category
+                            Email
                         </th>
                         <th scope="col" class="py-3 px-6">
-                            Price
+                            Tenant
                         </th>
-                        <th scope="col" class="py-3 px-6">
-                            Action
-                        </th>
+                        {{-- <th scope="col" class="py-3 px-6">
+                            <span class="sr-only">Edit</span>
+                        </th> --}}
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    {{-- @dd($users) --}}
+                    @foreach($users as $user)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Apple MacBook Pro 17"
+                            {{$user->name}}
                         </th>
                         <td class="py-4 px-6">
-                            Sliver
+                            {{$user->role ?? ''}}
                         </td>
                         <td class="py-4 px-6">
-                            Laptop
+                            {{$user->email}}
                         </td>
                         <td class="py-4 px-6">
-                            $2999
+                            {{$user->tenant?->name ?? 'admin'}}
                         </td>
-                        <td class="py-4 px-6">
+                        {{-- <td class="py-4 px-6 text-right">
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
+                        </td> --}}
                     </tr>
-                    <tr class="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Microsoft Surface Pro
-                        </th>
-                        <td class="py-4 px-6">
-                            White
-                        </td>
-                        <td class="py-4 px-6">
-                            Laptop PC
-                        </td>
-                        <td class="py-4 px-6">
-                            $1999
-                        </td>
-                        <td class="py-4 px-6">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Magic Mouse 2
-                        </th>
-                        <td class="py-4 px-6">
-                            Black
-                        </td>
-                        <td class="py-4 px-6">
-                            Accessories
-                        </td>
-                        <td class="py-4 px-6">
-                            $99
-                        </td>
-                        <td class="py-4 px-6">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr class="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Google Pixel Phone
-                        </th>
-                        <td class="py-4 px-6">
-                            Gray
-                        </td>
-                        <td class="py-4 px-6">
-                            Phone
-                        </td>
-                        <td class="py-4 px-6">
-                            $799
-                        </td>
-                        <td class="py-4 px-6">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Apple Watch 5
-                        </th>
-                        <td class="py-4 px-6">
-                            Red
-                        </td>
-                        <td class="py-4 px-6">
-                            Wearables
-                        </td>
-                        <td class="py-4 px-6">
-                            $999
-                        </td>
-                        <td class="py-4 px-6">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
+            {{ $users->links() }}
         </div>
+
+        <p class="text-center mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">To attain knowledge, add things every day; To attain wisdom, subtract things every day.</p>
 
     </div>
 @endsection
