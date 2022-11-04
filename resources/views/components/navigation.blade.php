@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ open: false }">
     <div class="relative px-4 pt-6 sm:px-6 lg:px-8">
         <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start"
             aria-label="Global">
@@ -10,7 +10,7 @@
                             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600">
                     </a>
                     <div class="-mr-2 flex items-center md:hidden">
-                        <button type="button"
+                        <button @click="open = true" type="button"
                             class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                             aria-expanded="false">
                             <span class="sr-only">Open main menu</span>
@@ -51,16 +51,23 @@
     </div>
 
     <!--
-Mobile menu, show/hide based on menu open state.
+    Mobile menu, show/hide based on menu open state.
 
-Entering: "duration-150 ease-out"
-  From: "opacity-0 scale-95"
-  To: "opacity-100 scale-100"
-Leaving: "duration-100 ease-in"
-  From: "opacity-100 scale-100"
-  To: "opacity-0 scale-95"
--->
-    <div class="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden">
+    Entering: "duration-150 ease-out"
+    From: "opacity-0 scale-95"
+    To: "opacity-100 scale-100"
+    Leaving: "duration-100 ease-in"
+    From: "opacity-100 scale-100"
+    To: "opacity-0 scale-95"
+    -->
+    <div x-show="open" x-cloak @click.away="open = false"
+    x-transition:enter="transition ease-out duration-150"
+    x-transition:enter-start="opacity-0 scale-95"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-100"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-95"
+    class="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden">
         <div class="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5">
             <div class="flex items-center justify-between px-5 pt-4">
                 <div>
@@ -69,7 +76,7 @@ Leaving: "duration-100 ease-in"
                         alt="">
                 </div>
                 <div class="-mr-2">
-                    <button type="button"
+                    <button @click="open = false" type="button"
                         class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                         <span class="sr-only">Close main menu</span>
                         <!-- Heroicon name: outline/x-mark -->
