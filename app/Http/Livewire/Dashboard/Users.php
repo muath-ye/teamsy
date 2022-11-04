@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Dashboard;
 
 use Livewire\Component;
 
-class Home extends Component
+class Users extends Component
 {
     public function render()
     {
-        return view('livewire.dashboard.home')->layout('layouts.dashboard');
+        return view('livewire.dashboard.users')->layout('layouts.dashboard');
     }
 }
