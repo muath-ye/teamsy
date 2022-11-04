@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Models\User;
 use Livewire\Component;
 
 class Users extends Component
 {
     public function render()
     {
-        return view('livewire.dashboard.users')->layout('layouts.dashboard');
+        return view('livewire.dashboard.users', ['users' => User::paginate(1)])
+                ->layout('layouts.dashboard');
     }
 }
