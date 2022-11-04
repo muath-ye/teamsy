@@ -5,12 +5,12 @@
         <div class="m-0 p-0 z-30 block">
             @include('components.topbar')
         </div>
-        <br class="bg-sky-200">
+        <br class="">
         <div class="flex pt-12">
 
             @include('components.sidebar')
             
-            <div class="bg-sky-50 w-full -z-10">
+            <div class="w-full -z-10">
                 <main class="p-4">
                     @include('components.breadcrumb')
                     @yield('content')
