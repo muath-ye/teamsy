@@ -1,7 +1,7 @@
 <aside>
     <!-- component -->
     <div id="view" class="h-full flex flex-row" x-data="{ sidenav: true, isOpen: '{{ url()->current() }}' }">
-        <button @click="sidenav = true"
+        <button @click="sidenav = ! sidenav"
             class="fixed z-30 m-3 p-2 border-2 bg-white rounded-md border-gray-200 text-gray-500 focus:bg-indigo-500 focus:outline-none focus:text-white top-0 left-0 ">
             <svg class="w-5 h-5 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
@@ -11,7 +11,7 @@
         </button>
         <div id="sidebar"
             class="w-64 bg-white h-screen md:block shadow-xl px-3 w-30 md:w-60 lg:w-60 overflow-x-hidden transition-transform duration-300 ease-in-out"
-            x-show="sidenav" @click.away="sidenav = false">
+            x-show="sidenav">
             <div class="space-y-6 md:space-y-10 mt-10">
                 <h1 class="text-indigo-600 uppercase font-bold text-4xl text-center md:hidden">
                     T
