@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Scopes\TenantScope;
+use App\Models\Tenant;
 
 trait BelongsToTenant
 {
@@ -19,5 +20,10 @@ trait BelongsToTenant
                 $model->tenant_id = session()->get('tenant_id');
             }
         });
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
     }
 }
