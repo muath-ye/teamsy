@@ -1,7 +1,8 @@
 <!-- component -->
 <div id="view" class="h-full w-screen flex flex-row" x-data="{ sidenav: true, isOpen: '{{url()->current()}}' }">
     <button @click="sidenav = true"
-        class="p-2 border-2 bg-white rounded-md border-gray-200 shadow-lg text-gray-500 focus:bg-indigo-500 focus:outline-none focus:text-white absolute top-0 left-0 sm:hidden">
+        class=" m-3 p-2 border-2 bg-white rounded-md border-gray-200 text-gray-500 focus:bg-indigo-500 focus:outline-none focus:text-white absolute top-0 left-0 "
+        >
         <svg class="w-5 h-5 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
@@ -19,8 +20,9 @@
                 Teamsy
             </h1>
             <div id="profile" class="space-y-3">
-                <img src="https://avatars.githubusercontent.com/u/34031333?v=4" alt="Avatar user"
-                    class="w-10 md:w-16 rounded-full mx-auto" />
+                <x-muathye-logo class="w-3 md:w-16 rounded-full mx-auto" />
+                {{-- <img src="https://avatars.githubusercontent.com/u/34031333?v=4" alt="Avatar user"
+                    class="w-10 md:w-16 rounded-full mx-auto" /> --}}
                 <div>
                     <h2 class="font-medium text-xs md:text-sm text-center text-indigo-500">
                         {{auth()->user()->name}}
