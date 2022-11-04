@@ -2,7 +2,7 @@
     <!-- component -->
     <div id="view" class="h-full flex flex-row" x-data="{ sidenav: true, isOpen: '{{ url()->current() }}' }">
         <button @click="sidenav = true"
-            class="fixed m-3 p-2 border-2 bg-white rounded-md border-gray-200 text-gray-500 focus:bg-indigo-500 focus:outline-none focus:text-white top-0 left-0 ">
+            class="fixed z-30 m-3 p-2 border-2 bg-white rounded-md border-gray-200 text-gray-500 focus:bg-indigo-500 focus:outline-none focus:text-white top-0 left-0 ">
             <svg class="w-5 h-5 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                     d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
