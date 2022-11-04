@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('body')
-    <div>
+    <div class="">
         <div class="m-0 p-0 z-30 block">
             @include('components.topbar')
         </div>
@@ -9,9 +9,10 @@
         <div class="flex pt-12">
 
             @include('components.sidebar')
-
+            
             <div class="bg-sky-50 w-full -z-10">
-                <main>
+                <main class="p-4">
+                    @include('components.breadcrumb')
                     @yield('content')
                 </main>
 
