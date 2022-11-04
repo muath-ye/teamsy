@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Models\Tenant;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -31,14 +32,19 @@ class Register extends Component
         $this->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
-            'company' => ['required'],
+            'company' => ['required', 'string', 'unique:tenants,name'],
             'password' => ['required', 'min:8', 'same:passwordConfirmation'],
+        ]);
+
+        $tenant = Tenant::create([
+            'name' => $this->company,
         ]);
 
         $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
-            'company' => $this->company,
+            'role' => 'admin', // Admin because this user is register the tenant and can add new users to the tenant
+            'tenant_id' => $tenant->tenant_id,
             'password' => Hash::make($this->password),
         ]);
 
