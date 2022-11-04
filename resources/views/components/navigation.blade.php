@@ -35,7 +35,7 @@
 
                 @if (Route::has('login'))
                 @auth
-                <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Company</a>
+                <a href="{{ route('home') }}" class="font-medium text-gray-500 hover:text-gray-900">Dashboard</a>
 
                 <a href="{{ route('logout') }}" class="font-medium text-gray-500 hover:text-gray-900"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >Log out</a>
@@ -95,7 +95,7 @@
                 <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900">Marketplace</a>
                 @if (Route::has('login'))
                 @auth
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900">Company</a>
+                <a href="{{ route('home') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900">Dashboard</a>
                 <a href="{{ route('logout') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >Log out</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
