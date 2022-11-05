@@ -1,4 +1,10 @@
 <div>
+    @if(session()->has('success'))
+    <x-alert type="success" message="{{session('success')}}"/>
+    @endif
+    @if(session()->has('fail'))
+    <x-alert type="fail" message="{{session('fail')}}"/>
+    @endif
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
         <div class="flex justify-between items-center px-4 py-4 bg-white dark:bg-gray-800">
             <div class="relative">
