@@ -1,9 +1,9 @@
 <div>
-    @if(session()->has('success'))
-    <x-alert type="success" message="{{session('success')}}"/>
+    @if (session()->has('success'))
+        <x-alert type="success" message="{{ session('success') }}" />
     @endif
-    @if(session()->has('fail'))
-    <x-alert type="fail" message="{{session('fail')}}"/>
+    @if (session()->has('fail'))
+        <x-alert type="fail" message="{{ session('fail') }}" />
     @endif
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
         <div class="flex justify-between items-center px-4 py-4 bg-white dark:bg-gray-800">
@@ -36,8 +36,7 @@
                         Action
                         <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 9l-7 7-7-7">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
                     </button>
@@ -82,16 +81,19 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="py-3 px-6">
-                        User name
+                        Name
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Status
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Title
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Role
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Department
-                    </th>
-                    <th scope="col" class="py-3 px-6">
-                        Email
+                        Application
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Tenant
@@ -106,7 +108,7 @@
                             <div class="flex justify-start items-center">
                                 @if ($user->photo)
                                     <div class="flex-shrink-0 h-10 w-10 mr-3">
-                                        <img class="h-10 w-10 rounded-full" src="{{ disk($user->photo, 's3-public') }}"
+                                        <img class="h-10 w-10 rounded-full" src="{{ diskUrl($user->photo, 's3-public') }}"
                                             alt="" loading="lazy">
                                     </div>
                                 @else
@@ -116,17 +118,60 @@
                                             d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                                     </svg>
                                 @endif
-                                <span>{{ $user->name }}</span>
+                                <div class="px-6 py-4 whitespace-no-wrap">
+                                    <div class="text-sm leading-5 text-gray-900 dark:text-white">{{ $user->name }}
+                                    </div>
+                                    <div class="text-sm leading-5 text-gray-500 dark:text-gray-400">{{ $user->email }}
+                                    </div>
+                                </div>
                             </div>
                         </th>
+                        <th>
+                            @if ($user->status)
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Active
+                                </span>
+                            @else
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                    Inactive
+                                </span>
+                            @endif
+                        </th>
+                        <td class="py-4 px-6">
+                            <div class="px-6 py-4 whitespace-no-wrap">
+                                <div class="text-sm leading-5 text-gray-900 dark:text-white">{{ $user->title ?? '' }}
+                                </div>
+                                <div class="text-sm leading-5 text-gray-500 dark:text-gray-400">
+                                    {{ $user->department ?? '' }}</div>
+                            </div>
+                        </td>
                         <td class="py-4 px-6">
                             {{ $user->role ?? '' }}
                         </td>
                         <td class="py-4 px-6">
-                            {{ $user->department ?? '' }}
-                        </td>
-                        <td class="py-4 px-6">
-                            {{ $user->email }}
+                            @if($application = $user->documents->where('type', 'application')->first())
+                                <div class="flex-shrink-0 h-10 w-10 mr-3">
+                                    <a class="text-green-800" href="{{ $user->applicationUrl() }}" target="_blank">
+                                        <svg class="text-green-800" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7 21H17C18.1046 21 19 20.1046 19 19V9.41421C19 9.149 18.8946 8.89464 18.7071 8.70711L13.2929 3.29289C13.1054 3.10536 12.851 3 12.5858 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21Z"
+                                                stroke="#4A5568" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            @else
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M7 21H17C18.1046 21 19 20.1046 19 19V9.41421C19 9.149 18.8946 8.89464 18.7071 8.70711L13.2929 3.29289C13.1054 3.10536 12.851 3 12.5858 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21Z"
+                                        stroke="#4A5568" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                            @endif
                         </td>
                         <td class="py-4 px-6">
                             {{ $user->tenant?->name ?? 'admin' }}
