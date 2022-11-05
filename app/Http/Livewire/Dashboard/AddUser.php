@@ -71,7 +71,7 @@ class AddUser extends Component
             'photo' => 'image|max:1024', // 1MB Max
         ]);
  
-        $this->photo->store('photos');
+        $this->photo->store('photos', 's3-public');
     }
 
     public function render()
