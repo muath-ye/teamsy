@@ -1,6 +1,6 @@
 <aside>
     <!-- component -->
-    <div id="view" class="h-full flex flex-row" x-data="{ sidenav: true, isOpen: '{{ url()->current() }}' }">
+    <div id="view" class="h-full flex flex-row" x-data="{ sidenav: true, isOpen: '{{ request()->root().'/'.request()->segment(1) }}' }">
         <button @click="sidenav = ! sidenav"
             class="fixed z-30 m-3 p-2 border-2 bg-white rounded-md border-gray-200 text-gray-500 focus:bg-indigo-500 focus:outline-none focus:text-white top-0 left-0 ">
             <svg class="w-5 h-5 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -13,23 +13,7 @@
             class="w-64 bg-white h-screen md:block shadow-xl px-3 w-30 md:w-60 lg:w-60 overflow-x-hidden transition-transform duration-300 ease-in-out"
             x-show="sidenav">
             <div class="space-y-6 md:space-y-10 mt-10">
-                <h1 class="text-indigo-600 uppercase font-bold text-4xl text-center md:hidden">
-                    T
-                </h1>
-                <h1 class="text-indigo-600 uppercase hidden md:block font-bold text-sm md:text-xl text-center">
-                    Teamsy
-                </h1>
-                <div id="profile" class="space-y-3">
-                    <x-muathye-logo class="w-3 md:w-16 rounded-full mx-auto" />
-                    {{-- <img src="https://avatars.githubusercontent.com/u/34031333?v=4" alt="Avatar user"
-                    class="w-10 md:w-16 rounded-full mx-auto" /> --}}
-                    <div>
-                        <h2 class="font-medium text-xs md:text-sm text-center text-indigo-500">
-                            {{ auth()->user()->name }}
-                        </h2>
-                        <p class="text-xs text-gray-500 text-center">{{ auth()->user()->role ?? '' }}</p>
-                    </div>
-                </div>
+                <x-muathye-logo class="w-3 md:w-16 rounded-full mx-auto" />
 
                 <div id="menu" class="flex flex-col space-y-2">
                     @if (Route::has('login'))
