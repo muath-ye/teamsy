@@ -36,16 +36,6 @@ class AddUser extends Component
 
         $filename = $this->photo->store('photos', 's3-public');
 
-        // dd([
-        //     'name' => $this->name,
-        //     'email' => $this->email,
-        //     'department' => $this->department,
-        //     'title' => $this->title,
-        //     'status' => $this->status,
-        //     'role' => $this->role,
-        //     'photo' => $filename,
-        //     'password' => bcrypt(Str::random(16)),
-        // ]);
         $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
