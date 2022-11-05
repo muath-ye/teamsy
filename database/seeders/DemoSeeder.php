@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Login;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,22 +17,22 @@ class DemoSeeder extends Seeder
      */
     public function run()
     {
-        Tenant::factory()->create(3);
+        Tenant::factory(3)->create();
 
         foreach(Tenant::all() as $tenant) {
-            User::factory()->create([
+            User::factory(20)->create([
                 'tenant_id' => $tenant->id,
-            ], 20);
+            ]);
         }
 
         foreach(User::all() as $user) {
-            factory(Login::class, 5)->create([
+            Login::factory(5)->create([
                 'user_id' => $user->id,
                 'tenant_id' => $user->tenant_id,
             ]);
         }
 
-        factory(User::class)->create([
+        User::create([
             'tenant_id' => null,
             'email' => 'admin@admin.com',
         ]);
