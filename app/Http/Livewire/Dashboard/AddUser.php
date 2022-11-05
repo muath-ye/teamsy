@@ -65,6 +65,15 @@ class AddUser extends Component
         return redirect('/team');
     }
 
+    public function save()
+    {
+        $this->validate([
+            'photo' => 'image|max:1024', // 1MB Max
+        ]);
+ 
+        $this->photo->store('photos');
+    }
+
     public function render()
     {
         return view('livewire.dashboard.add-user');
