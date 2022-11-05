@@ -9,6 +9,11 @@ use Livewire\Component;
 class Users extends Component
 {
     public $super;
+    public $selectedTenant;
+    public function filterTenant($key)
+    {
+        $this->selectedTenant = $key;
+    }
     public function impersonate($userId)
     {
         if (!is_null(auth()->user()->tenant_id)) {
@@ -19,7 +24,7 @@ class Users extends Component
         session()->put('impersonate', $originalId);
         auth()->loginUsingId($userId);
 
-        return redirect('/team');
+        return redirect('/users');
     }
     public function mount()
     {
@@ -32,6 +37,11 @@ class Users extends Component
     }
     public function render()
     {
-        return view('livewire.dashboard.users', ['users' => User::paginate()]);
+        return view('livewire.dashboard.users', ['users' => User::where(function($q) {
+            if ($this->selectedTenant) {
+                return $q->where('tenant_id', $this->selectedTenant);
+            }
+            return $q;
+        })->paginate()]);
     }
 }
