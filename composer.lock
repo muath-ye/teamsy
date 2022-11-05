@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70a5582ebf5f6eb56439e704d5f642b7",
+    "content-hash": "f61579af04e023c19e26f6bfa8760f6d",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -5844,6 +5844,57 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "yemeni-open-source/laravel-helpers",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Yemeni-Open-Source/laravel-helpers.git",
+                "reference": "8593454ae66485cb22247e8926b40789f9c75365"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Yemeni-Open-Source/laravel-helpers/zipball/8593454ae66485cb22247e8926b40789f9c75365",
+                "reference": "8593454ae66485cb22247e8926b40789f9c75365",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "YemeniOpenSource\\LaravelHelpers\\HelpersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Database\\Seeders\\": "database/seeders/",
+                    "YemeniOpenSource\\LaravelHelpers\\": "src/",
+                    "YemeniOpenSource\\LaravelHelpers\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "muathye",
+                    "email": "muath.ye@gmail.com"
+                }
+            ],
+            "description": "A wonderful command line tool for managing your helpers.",
+            "keywords": [
+                "helpers",
+                "laravel-helpers",
+                "yemeni-open-source"
+            ],
+            "support": {
+                "issues": "https://github.com/Yemeni-Open-Source/laravel-helpers/issues",
+                "source": "https://github.com/Yemeni-Open-Source/laravel-helpers/tree/v1.0.1"
+            },
+            "time": "2022-06-24T23:30:45+00:00"
         }
     ],
     "packages-dev": [
