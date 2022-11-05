@@ -20,8 +20,15 @@ if (! function_exists('carbon')) {
 }
 
 if (! function_exists('disk')) {
-    function disk($url, $disk = 's3')
+    function diskUrl($url, $disk = 's3-public')
     {
         return Storage::disk($disk)->url($url);
+    }
+}
+
+if (! function_exists('disk')) {
+    function diskGet($url, $disk = 's3')
+    {
+        return Storage::disk($disk)->get($url);
     }
 }
