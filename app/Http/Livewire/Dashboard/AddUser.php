@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Dashboard;
 
 
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -62,16 +62,9 @@ class AddUser extends Component
             'size' => $this->application->getSize(),
         ]);
 
-        return redirect('/team');
-    }
+        session()->flash('success', 'User Created');
 
-    public function save()
-    {
-        $this->validate([
-            'photo' => 'image|max:1024', // 1MB Max
-        ]);
- 
-        $this->photo->store('photos', 's3-public');
+        return redirect('/users');
     }
 
     public function render()
