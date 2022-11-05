@@ -21,50 +21,96 @@
                     placeholder="Search for users">
             </div>
             <div class="flex flex-row justify-start">
-                <div class="mx-2">
-                    <a href="{{ route('users.add') }}"
-                        class="pointer inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                        type="button">
-                        + Add User
-                    </a>
-                </div>
+                
+                @if ($super)
                 <div>
-                    <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction"
+                    {{-- <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction"
                         class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                         type="button">
-                        <span class="sr-only">Action button</span>
-                        Action
+                        <span class="sr-only">Tenant button</span>
+                        Choose Tenant
                         <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
-                    </button>
+                    </button> --}}
                     <!-- Dropdown menu -->
-                    <div id="dropdownAction"
+                    {{-- <div id="dropdownAction"
                         class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                             aria-labelledby="dropdownActionButton">
+                            @foreach ($tenants as $key => $tenant)
                             <li>
-                                <a href="#"
-                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
+                                <a href="{{$key}}"
+                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{$tenant}}</a>
                             </li>
-                            <li>
-                                <a href="#"
-                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promote</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Activate
-                                    account</a>
-                            </li>
+                            @endforeach
                         </ul>
                         <div class="py-1">
                             <a href="#"
                                 class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete
                                 User</a>
                         </div>
+                    </div> --}}
+                    <div class="flex justify-center">
+                        <div x-data="{
+                            open: false,
+                            toggle() {
+                                if (this.open) {
+                                    return this.close()
+                                }
+                        
+                                this.$refs.button.focus()
+                        
+                                this.open = true
+                            },
+                            close(focusAfter) {
+                                if (!this.open) return
+                        
+                                this.open = false
+                        
+                                focusAfter && focusAfter.focus()
+                            }
+                        }" x-on:keydown.escape.prevent.stop="close($refs.button)"
+                            x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+                            x-id="['dropdown-button']" class="relative">
+                            <!-- Button -->
+                            <button x-ref="button" x-on:click="toggle()" :aria-expanded="open"
+                                :aria-controls="$id('dropdown-button')" type="button"
+                                class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                Choose Tenant
+
+                                <!-- Heroicon: chevron-down -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400"
+                                    viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+
+                            <!-- Panel -->
+                            <div x-ref="panel" x-show="open" x-transition.origin.top.left
+                                x-on:click.outside="close($refs.button)" :id="$id('dropdown-button')"
+                                style="display: none;" class="absolute left-0 mt-2 w-40 rounded-md bg-white dark:bg-gray-600 ">
+                                @foreach ($tenants as $key => $tenant)
+                                <button wire:click="filterTenant({{$key}})"
+                                    class="w-full text-start py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-200 dark:hover:text-white">
+                                    {{$tenant}}
+                                </button>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
+                </div>
+                @endif
+                <div class="mx-2">
+                    <a href="{{ route('users.add') }}"
+                        class="pointer inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                        type="button">
+                        + Add User
+                    </a>
                 </div>
             </div>
         </div>
