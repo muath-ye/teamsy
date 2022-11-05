@@ -19,9 +19,9 @@ if (! function_exists('carbon')) {
     }
 }
 
-if (! function_exists('storage')) {
-    function storage($parseString = null, $tz = null)
+if (! function_exists('disk')) {
+    function disk($url, $disk = 's3')
     {
-        return new Storage($parseString, $tz);
+        return Storage::disk($disk)->url($url);
     }
 }
