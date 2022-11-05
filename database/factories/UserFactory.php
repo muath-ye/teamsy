@@ -21,11 +21,14 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'role' => 'admin',
+            'role' => 'Admin',
+            'status' => 1,
             'email_verified_at' => now(),
             'password' => bcrypt('password'), // password
             'remember_token' => Str::random(10),
             'tenant_id' => Tenant::factory()->create(),
+            'title' => fake()->jobTitle(),
+            'department' => fake()->sentence(2),
         ];
     }
 
