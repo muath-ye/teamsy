@@ -32,7 +32,7 @@ class DemoSeeder extends Seeder
             ]);
         }
 
-        User::create([
+        User::factory()->create([
             'tenant_id' => null,
             'email' => 'admin@admin.com',
         ]);
