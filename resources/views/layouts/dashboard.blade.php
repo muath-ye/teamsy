@@ -13,6 +13,7 @@
             <div class="w-full z-10">
                 <main class="p-4">
                     @include('components.breadcrumb')
+                    @include('components.impersonate-alert')
                     @yield('content')
                 </main>
 
