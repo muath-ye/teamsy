@@ -56,12 +56,6 @@
                                     <div>
                                         <input type="file" wire:model="photo">
                                     </div>
-                                    <span class="inline-flex rounded-md shadow-sm">
-                                        <button wire:click="save"
-                                            class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                                            Save Photo
-                                        </button>
-                                    </span>
                                     @error('photo')
                                         <div class="text-sm text-red-500 mt-2">{{ $message }}</div>
                                     @enderror
