@@ -106,9 +106,9 @@
                         <th scope="row"
                             class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="flex justify-start items-center">
-                                @if ($user->photo)
+                                @if ($user->avatarUrl())
                                     <div class="flex-shrink-0 h-10 w-10 mr-3">
-                                        <img class="h-10 w-10 rounded-full" src="{{ diskUrl($user->photo, 's3-public') }}"
+                                        <img class="h-10 w-10 rounded-full" src="{{ $user->avatarUrl() }}"
                                             alt="" loading="lazy">
                                     </div>
                                 @else
