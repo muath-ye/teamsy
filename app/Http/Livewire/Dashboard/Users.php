@@ -9,7 +9,6 @@ class Users extends Component
 {
     public function render()
     {
-        return view('livewire.dashboard.users', ['users' => User::paginate( )])
-                ->layout('layouts.dashboard');
+        return view('livewire.dashboard.users', ['users' => User::paginate()]);
     }
 }
