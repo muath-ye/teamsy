@@ -119,9 +119,18 @@
                                     </svg>
                                 @endif
                                 <div class="px-6 py-4 whitespace-no-wrap">
-                                    <div class="text-sm leading-5 text-gray-900 dark:text-white">{{ $user->name }}
+                                    <div>
+                                        <div class="leading-5">
+                                            <span
+                                                class="text-sm leading-5 font-medium inline text-gray-900 dark:text-white">{{ $user->name }}</span>
+                                            @if ($super && $user->id != auth()->id())
+                                                <a wire:click="impersonate({{ $user->id }})" href="#"
+                                                    class="inline px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800">Impersonate</a>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <div class="text-sm leading-5 text-gray-500 dark:text-gray-400">{{ $user->email }}
+                                    <div class="text-sm leading-5 text-gray-500 dark:text-gray-400">
+                                        {{ $user->email }}
                                     </div>
                                 </div>
                             </div>
@@ -151,11 +160,11 @@
                             {{ $user->role ?? '' }}
                         </td>
                         <td class="py-4 px-6">
-                            @if($application = $user->documents->where('type', 'application')->first())
+                            @if ($application = $user->documents->where('type', 'application')->first())
                                 <div class="flex-shrink-0 h-10 w-10 mr-3">
                                     <a class="text-green-800" href="{{ $user->applicationUrl() }}" target="_blank">
-                                        <svg class="text-green-800" width="48" height="48" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="text-green-800" width="48" height="48" viewBox="0 0 24 24"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M7 21H17C18.1046 21 19 20.1046 19 19V9.41421C19 9.149 18.8946 8.89464 18.7071 8.70711L13.2929 3.29289C13.1054 3.10536 12.851 3 12.5858 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21Z"
                                                 stroke="#4A5568" stroke-width="2" stroke-linecap="round"
