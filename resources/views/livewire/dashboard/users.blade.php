@@ -88,26 +88,42 @@
                         Role
                     </th>
                     <th scope="col" class="py-3 px-6">
+                        Department
+                    </th>
+                    <th scope="col" class="py-3 px-6">
                         Email
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Tenant
                     </th>
-                    {{-- <th scope="col" class="py-3 px-6">
-                        <span class="sr-only">Edit</span>
-                    </th> --}}
                 </tr>
             </thead>
             <tbody>
-                {{-- @dd($users) --}}
                 @foreach ($users as $user)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row"
                             class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $user->name }}
+                            <div class="flex justify-start items-center">
+                                @if ($user->photo)
+                                    <div class="flex-shrink-0 h-10 w-10 mr-3">
+                                        <img class="h-10 w-10 rounded-full" src="{{ disk($user->photo, 's3-public') }}"
+                                            alt="" loading="lazy">
+                                    </div>
+                                @else
+                                    <svg class="h-10 w-10 text-gray-300 rounded-full" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                @endif
+                                <span>{{ $user->name }}</span>
+                            </div>
                         </th>
                         <td class="py-4 px-6">
                             {{ $user->role ?? '' }}
+                        </td>
+                        <td class="py-4 px-6">
+                            {{ $user->department ?? '' }}
                         </td>
                         <td class="py-4 px-6">
                             {{ $user->email }}
@@ -115,9 +131,6 @@
                         <td class="py-4 px-6">
                             {{ $user->tenant?->name ?? 'admin' }}
                         </td>
-                        {{-- <td class="py-4 px-6 text-right">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td> --}}
                     </tr>
                 @endforeach
             </tbody>
