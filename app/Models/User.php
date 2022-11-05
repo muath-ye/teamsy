@@ -49,4 +49,47 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function avatarUrl()
+    {
+        if($this->photo) {
+            return Storage::disk('s3-public')->url($this->photo);
+        }
+        return 'https://avatars.dicebear.com/api/initials/' . $this->name . '.svg';
+    }
+
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('name', 'like', '%'.$query.'%')
+                ->orWhere('email', 'like', '%'.$query.'%');
+    }
+
+    public function isAdmin()
+    {
+        return $this->role == 'Admin';
+    }
+
+    public function isHR()
+    {
+        return $this->role == 'Human Resources';
+    }
+
+    public function applicationUrl()
+    {
+        if($this->application()) {
+            return url('/documents/' . $this->id . '/' . $this->application()->filename);
+        }
+        return '#';
+    }
+
+    public function application()
+    {
+        return $this->documents()->where('type', 'application')->first();
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
 }
